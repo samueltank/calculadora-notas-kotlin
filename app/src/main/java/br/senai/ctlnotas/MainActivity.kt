@@ -7,42 +7,77 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : AppCompatActivity()
+{
+    private lateinit var nomeEditText: EditText;    // Global Scope run later : lateinit var
+    private lateinit var nota1EditText: EditText;   // Global Scope
+    private lateinit var nota2EditText: EditText;   // Global Scope
 
-        val calular = findViewById<Button>(R.id.calcular)
-        val sair    = findViewById<Button>(R.id.sair)
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        sair.setOnClickListener {
-            finish()
-        }
+        val calcular = findViewById<Button>(R.id.calcular);
+        val sair     = findViewById<Button>(R.id.sair);
 
-        calular.setOnClickListener {
-            val notaOne   = findViewById<EditText>(R.id.nota1).text.toString().toInt()
-            val notaTwo   = findViewById<EditText>(R.id.nota2).text.toString().toInt()
-            val faltas    = findViewById<EditText>(R.id.faltas).text.toString().toInt()
-            val resultado = findViewById<TextView>(R.id.resultado)
-            val media     = ((notaOne + notaTwo) / 2)
+        sair.setOnClickListener {finish()}
 
-            val msgNota1  = findViewById<TextView>(R.id.msgNota1)
-            val msgNota2  = findViewById<TextView>(R.id.msgNota2)
-            val msgFaltas = findViewById<TextView>(R.id.msgFaltas)
-            val msgMedia  = findViewById<TextView>(R.id.msgMedia)
+        calcular.setOnClickListener {
+            nota1EditText         = findViewById(R.id.nota1);
+            nota2EditText         = findViewById(R.id.nota2);
+            nomeEditText          = findViewById(R.id.Nome);
+            val resultTextView    = findViewById<TextView>(R.id.resultado);
 
-            msgNota1.text   = "Nota 1: ${notaOne}"
-            msgNota2.text   = "Nota 2: ${notaTwo}"
-            msgFaltas.text  = "Faltas: ${faltas}"
-            msgMedia.text   = "Media:  ${media}"
+            if (validate())
+            {
+                var nota1 = convertToStringToInt(nota1EditText);
+                var nota2 = convertToStringToInt(nota2EditText);
+                val media = calcMedia(nota1, nota2, 10, 10, 10);
 
-            if(media >= 5) {
-                resultado.text = "Aprovado";
-                resultado.setTextColor(Color.GREEN)
-            } else {
-                resultado.text = "Reprovada";
-                resultado.setTextColor(Color.RED)
+                val msgNota1   = findViewById<TextView>(R.id.msgNota1)
+                val msgNota2   = findViewById<TextView>(R.id.msgNota2)
+                val msgName    = findViewById<TextView>(R.id.msgName)
+                val msgMedia   = findViewById<TextView>(R.id.msgMedia)
+
+                msgName.text    = "Nome: ${nomeEditText.text}"
+                msgNota1.text   = "Nota 1: ${nota1}";
+                msgNota2.text   = "Nota 2: ${nota2}";
+                msgMedia.text   = "Media:  ${media}";
+
+                resultTextView.text = alunoStatus(media);
             }
         }
+    }
+
+
+    private fun validate() : Boolean
+    {
+        var noError = true;
+        if (nomeEditText.text.isBlank())
+        {
+            nomeEditText.setError("Digite o seu nome");
+            noError = false;
+        }
+
+        if (nota1EditText.text.isBlank())
+        {
+            nota1EditText.setError("Digite sua nota 1");
+            noError = false;
+        }
+
+        if (nota1EditText.text.isBlank())
+        {
+            nota2EditText.setError("Digite sua nota 2");
+            noError = false;
+        }
+
+        return noError;
+    }
+
+    private fun convertToStringToInt(variable: EditText) : Int
+    {
+        val vari = variable.text.toString().toInt();
+        return vari;
     }
 }
