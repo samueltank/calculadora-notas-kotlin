@@ -1,5 +1,6 @@
 package br.senai.ctlnotas
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,23 +30,32 @@ class MainActivity : AppCompatActivity()
             nomeEditText          = findViewById(R.id.Nome);
             val resultTextView    = findViewById<TextView>(R.id.resultado);
 
-            if (validate())
-            {
+            if (validate()) {
                 var nota1 = convertToStringToInt(nota1EditText);
                 var nota2 = convertToStringToInt(nota2EditText);
                 val media = calcMedia(nota1, nota2, 10, 10, 10);
 
-                val msgNota1   = findViewById<TextView>(R.id.msgNota1)
-                val msgNota2   = findViewById<TextView>(R.id.msgNota2)
-                val msgName    = findViewById<TextView>(R.id.msgName)
-                val msgMedia   = findViewById<TextView>(R.id.msgMedia)
+                val intent = Intent(this, RelatorioActivity::class.java);
 
-                msgName.text    = "Nome: ${nomeEditText.text}"
-                msgNota1.text   = "Nota 1: ${nota1}";
-                msgNota2.text   = "Nota 2: ${nota2}";
-                msgMedia.text   = "Media:  ${media}";
+                intent.putExtra("nome", nomeEditText.text.toString());
+                intent.putExtra("nota1", nota1.toString())
+                intent.putExtra("nota2", nota2.toString())
+                intent.putExtra("media", media.toString())
+                intent.putExtra("situacao", alunoStatus(media))
 
-                resultTextView.text = alunoStatus(media);
+                startActivity(intent);
+
+//                val msgNota1   = findViewById<TextView>(R.id.msgNota1)
+//                val msgNota2   = findViewById<TextView>(R.id.msgNota2)
+//                val msgName    = findViewById<TextView>(R.id.msgName)
+//                val msgMedia   = findViewById<TextView>(R.id.msgMedia)
+//
+//                msgName.text    = "Nome: ${nomeEditText.text}"
+//                msgNota1.text   = "Nota 1: ${nota1}";
+//                msgNota2.text   = "Nota 2: ${nota2}";
+//                msgMedia.text   = "Media:  ${media}";
+//
+//                resultTextView.text = alunoStatus(media);
             }
         }
     }
