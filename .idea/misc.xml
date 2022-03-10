@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/21276436/AndroidStudioProjects/Controledenotas/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/21276436/AndroidStudioProjects/calculadora-notas-kotlin/app/src/main/res/layout/activity_splash.xml" value="0.22" />
+        <entry key="..\:/Users/21276436/AndroidStudioProjects/calculadora-notas-kotlin/app/src/main/res/mipmap-anydpi-v26/ic_calc_icon.xml" value="0.20555555555555555" />
+        <entry key="..\:/Users/21276436/AndroidStudioProjects/calculadora-notas-kotlin/app/src/main/res/mipmap-anydpi-v26/ic_calc_icon_round.xml" value="0.20555555555555555" />
         <entry key="..\:/Users/21276436/AndroidStudioProjects/controle-de-notas/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/21276436/AndroidStudioProjects/controle-de-notas/app/src/main/res/layout/activity_relatorio.xml" value="0.1" />
       </map>
